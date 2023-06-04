@@ -70,3 +70,11 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "administrate", "~> 0.18.0"
+
+gem "devise", "~> 4.9"
+
+gem "activestorage", "~> 7.0"
+
+gem "table_print", "~> 1.5"

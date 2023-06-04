@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Private messages</h1>
+
+<div id="private_messages">
+  <% @private_messages.each do |private_message| %>
+    <%= render private_message %>
+    <p>
+      <%= link_to "Show this private message", private_message %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New private message", new_private_message_path %>

@@ -1,0 +1,10 @@
+<h1>Editing private message</h1>
+
+<%= render "form", private_message: @private_message %>
+
+<br>
+
+<div>
+  <%= link_to "Show this private message", @private_message %> |
+  <%= link_to "Back to private messages", private_messages_path %>
+</div>

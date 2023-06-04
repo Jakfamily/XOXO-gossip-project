@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @private_message %>
+
+<div>
+  <%= link_to "Edit this private message", edit_private_message_path(@private_message) %> |
+  <%= link_to "Back to private messages", private_messages_path %>
+
+  <%= button_to "Destroy this private message", @private_message, method: :delete %>
+</div>
