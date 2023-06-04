@@ -10,6 +10,218 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
  *= require_tree .
  *= require_self
  */
+
+ * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+ 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+}
+ a{
+   text-decoration: none;
+ }
+
+.content {
+  flex-grow: 1;
+}
+
+/*************************************navbar*****************************************/
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  padding: 10px;
+}
+
+.nav-logo {
+  text-align: left;
+  font-size: 30px;
+}
+
+.nav-logo a {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin-right: 20px;
+}
+
+.nav-links li a{
+  margin-right: 10px;
+  font-size: 20px;
+  color: #333;
+  
+}
+
+.nav-links li a:hover {
+  cursor: pointer;
+  color: #ff3366;
+  position: relative;
+}
+
+.nav-links li a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #ff3366;
+  animation: line-appear 0.3s ease-in-out forwards;
+}
+
+@keyframes line-appear {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/**************************************Body*******************************************/
+
+/**************************************form*****************************************/
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  color: #333;
+}
+
+.form-container h2 {
+  color: #ff3366;
+}
+
+.field {
+  margin-bottom: 10px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.field label {
+  display: block;
+}
+
+.field input[type="email"],
+.field input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  outline: none;
+}
+
+.field input[type="email"]:hover,
+.field input[type="password"]:hover {
+  box-shadow: 0 0 5px #333;
+}
+
+
+.actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.actions input[type="submit"] {
+  background-color: #ff3366;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #ff5588;
+}
+
+/**************************************footer*****************************************/
+footer {
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+/* Style pour la barre de séparation */
+.separator {
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px auto;
+  max-width: 200px;
+}
+
+.footer-logo {
+  margin-bottom: 10px;
+}
+
+.footer-logo a {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+}
+
+.logo-color {
+  color: #ff3366;
+}
+
+.social-media {
+  margin-top: 10px;
+}
+
+.social-media h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.social-media ul {
+  list-style: none;
+  padding: 0;
+}
+
+.social-media ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-media ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #bfbfbf;
+}
+
+.social-media ul li a:hover {
+  color: #ff3366;
+  background-color: #333;
+}

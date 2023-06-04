@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>XOXOGossipProject</title>
+    <title>GossipProject</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <nav>
+      <div class="nav-logo">
+        <a href="/"><span class="logo-color">XOXO </span>Gossip Projet</a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/team">Team</a></li>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %> <!-- Vérifie si l'utilisateur est un admin -->
+            <li><%= link_to 'Admin Dashboard',  admin_dashboard_path %></li> <!-- Lien vers le tableau de bord de l'admin -->
+          <% end %>
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+
+
+
+    <div class="content">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+
+
+    <footer>
+      <div class="footer-logo">
+      <p><a href="/"><span class ="logo-color">XOXO </span>Gossip Projet</a></p>
+      </div>
+      <div class="separator"></div>
+      <div class="social-media">
+      <h4>Suivez-moi :</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/fariajeanbap" target="_blank"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="https://www.twitter.com/JAKfamilly" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="https://github.com/Jakfamily" target="_blank"><i class="fab fa-github"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/faria-jean-baptiste-2a76a0270/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+      </ul>
+    </div>
+
+    </footer>
   </body>
 </html>
