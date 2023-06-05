@@ -41,6 +41,7 @@ li {
   flex-grow: 1;
 }
 
+
 /*************************************navbar*****************************************/
 nav {
   display: flex;
@@ -48,6 +49,7 @@ nav {
   align-items: center;
   margin: 20px;
   padding: 10px;
+  background-color: #f9f9f9;
 }
 
 .nav-logo {
@@ -103,21 +105,131 @@ nav {
 
 /**************************************Body*******************************************/
 /*************************************gossip card*************************************/
+/* Card styles */
 .gossip-card {
-  background-color: #333;
-  color: #ff3366;
+  background-color: #ffffff;
+  color: #333;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #dbdbdb;
+  box-shadow: 1px 1px 3px #333;
+  transition: box-shadow 0.3s ease;
 }
 
+.gossip-card:hover {
+  box-shadow: 3px 3px 6px #333;
+}
+
+/* Alignment */
 .text-center {
   text-align: center;
 }
 
+/* Heading color */
 .color-h1 {
   color: #333;
 }
+
+/* Button styles */
+.actions {
+  background-color: #ff3366;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions:hover {
+  background-color: #ff5588;
+}
+
+/* Comment form */
+.comment-form {
+  margin-top: 10px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.comment-button {
+  background-color: #ff3366;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-button:hover {
+  background-color: #ff5588;
+}
+
+/* Comment styles */
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+.comment-author {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-content {
+  color: #333;
+}
+
+.comment-actions {
+  margin-top: 5px;
+}
+
+.edit-comment,
+.delete-comment {
+  color: #333;
+  margin-right: 10px;
+  text-decoration: none;
+  position: relative;
+}
+
+.edit-comment:hover,
+.delete-comment:hover {
+  color: #ff3366;
+}
+
+.edit-comment::after,
+.delete-comment::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: transparent;
+  transition: width 0.3s ease-in-out;
+}
+
+.edit-comment:hover::after,
+.delete-comment:hover::after {
+  width: 100%;
+  background-color: #ff3366;
+}
+
+/* User name */
+strong {
+  color: #333;
+}
+
 /**************************************about******************************************/
 .container {
   max-width: 800px;
@@ -226,7 +338,48 @@ p {
 .form-card a {
   color: #333;
 }
+/**************************************btn like *****************************************/
+.like-button {
+  display: inline-block;
+  background-color: #bfbfbf;
+  color: #ff3366;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
+.like-button:hover {
+  background-color: #ff3366;
+  color: #fff;
+}
+
+.like-button i {
+  margin-right: 5px;
+}
+
+.like-count {
+  margin-left: 5px;
+}
+
+.comments-section {
+  margin-top: 10px;
+}
+
+.comment {
+  margin-bottom: 10px;
+}
+
+.comment .comment-author {
+  font-weight: bold;
+}
+
+.comment .comment-content {
+  margin-top: 5px;
+}
+.color-333 {
+  color: #333;
+}
 /**************************************footer*****************************************/
 footer {
   text-align: center;

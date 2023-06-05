@@ -4,8 +4,7 @@
   <div class="row">
     <% @gossips.each do |gossip| %>
       <div class="col-md-4 mb-4">
-        <%= render 'admin/gossips/gossip', gossip: gossip %>
-      </div>
+        <%= render 'gossip', gossip: gossip %>
     <% end %>
   </div>
 

@@ -3,8 +3,7 @@
 <%= render @gossip %>
 
 <div>
-  <%= link_to "Edit this gossip", edit_gossip_path(@gossip) %> |
-  <%= link_to "Back to gossips", gossips_path %>
-
-  <%= button_to "Destroy this gossip", @gossip, method: :delete %>
+  <%= button_to "Edit this gossip", edit_gossip_path(@gossip), method: :get, class: "actions" %>
+  <%= button_to "Back to gossips", gossips_path, method: :get, class: "actions" %>
+  <%= button_to "Destroy this gossip", @gossip, method: :delete, class: "actions" %>
 </div>

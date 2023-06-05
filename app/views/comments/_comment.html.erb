@@ -1,4 +1,6 @@
-<div id="<%= dom_id comment %>">
+<div id="<%= dom_id(comment) %>" class="form-card">
+  <h2>Comment Details</h2>
+  <br>
   <p>
     <strong>Content:</strong>
     <%= comment.content %>
@@ -13,5 +15,4 @@
     <strong>User:</strong>
     <%= comment.user_id %>
   </p>
-
 </div>

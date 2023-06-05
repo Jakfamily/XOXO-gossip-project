@@ -1,25 +1,63 @@
 <main>
   <% if user_signed_in? %>
-    <div>
+    <div class="welcome">
       <p>Bienvenue <%= current_user.first_name %> ! Vous êtes maintenant connecté.</p>
     </div>
   <% end %>
 
-  <h1 class="text-center">Bienvenue sur XOXO <span class="color-h1">Gossip Project</span></h1>
-  <p class="text-center">Parcours le mur des gossips pour voir les dernières nouveautés</p>
+  <h1 class="text-center"><span class="color-h1">Bienvenue sur</span> XOXO <span class="color-h1">Gossip Project</span></h1>
+  <p class="text-center">Parcourez le mur des gossips pour voir les dernières nouveautés</p>
 
   <% if user_signed_in? %>
-    <%= link_to "New Gossip", new_gossip_path(user_id: current_user.try(:id)) %>
+    <%= link_to "New Gossip", new_gossip_path(user_id: current_user.try(:id)), class: "new-gossip-button" %>
   <% end %>
 
   <% @gossips.each do |gossip| %>
     <div class="gossip-card">
       <article>
-        <div>
+        <div class="gossip-header">
           <h2><%= gossip.title %></h2>
-          <p><em><%= gossip.content %></em></p>
-          <p>Par <%= gossip.user.first_name %></p>
-          <a href="<%= gossip_path(gossip) %>">Voir le potin</a>
+          <p class="gossip-author">Par <%= gossip.user.first_name %></p>
+        </div>
+        <div class="gossip-actions">
+          <div class="gossip-buttons">
+            <button class="actions" onclick="window.location.href='<%= gossip_path(gossip) %>'">
+              Voir le potin
+            </button>
+            <%= turbo_frame_tag "like-frame-#{gossip.id}" do %>
+              <%= button_to like_gossip_path(gossip), method: :post, class: "like-button" do %>
+                <i class="fas fa-thumbs-up"></i>
+                <span class="like-count"><%= gossip.likes.count %></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="comments-section">
+            <ul class="comment-list">
+              <% gossip.comments.each do |comment| %>
+                <li class="comment">
+                  <div class="comment-author">
+                    <strong><%= comment.user.first_name %></strong>
+                  </div>
+                  <div class="comment-content">
+                    <%= comment.content %>
+                  </div>
+                  <% if user_signed_in? && current_user == comment.user %>
+                    <div class="comment-actions">
+                      <%= link_to "Edit", edit_comment_path(comment), class: "edit-comment" %>
+                      <%= link_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-comment" %>
+                    </div>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <% if user_signed_in? %>
+            <%= form_with(model: Comment.new, url: comments_path, class: "comment-form") do |form| %>
+              <%= form.text_area :content, placeholder: "Add a comment...", rows: 2, class: "comment-input" %>
+              <%= form.hidden_field :gossip_id, value: gossip.id %>
+              <%= form.submit "Post", class: "comment-button" %>
+            <% end %>
+          <% end %>
         </div>
       </article>
     </div>

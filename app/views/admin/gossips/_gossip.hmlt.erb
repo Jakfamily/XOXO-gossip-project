@@ -1,0 +1,11 @@
+<div class="gossip-item card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= gossip.title %></h5>
+    <p class="card-text"><strong>Auteur:</strong> <%= gossip.user.first_name %> <%= gossip.user.last_name %></p>
+    <hr>
+    <!-- Ajoutez toutes les autres informations que vous souhaitez afficher pour chaque gossip -->
+    <% if current_user.admin? %>
+      <%= link_to "Supprimer le potin", admin_gossip_path(gossip), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce potin ?" }, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>

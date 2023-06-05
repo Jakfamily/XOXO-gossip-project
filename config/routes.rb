@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   get 'pages/secret'
   get 'pages/contact'
   get 'pages/team'
@@ -8,7 +7,10 @@ Rails.application.routes.draw do
   resources :tags
   resources :private_messages
   resources :likes
-  resources :gossips
+  resources :gossips do
+    post 'like', on: :member
+    delete 'dislike', on: :member
+  end
   resources :comments
   resources :cities
 
@@ -31,5 +33,5 @@ Rails.application.routes.draw do
     resources :gossips
     # Ajoutez d'autres ressources pour l'administration si nécessaire
   end
-
 end
+

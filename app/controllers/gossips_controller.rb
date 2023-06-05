@@ -5,9 +5,12 @@ class GossipsController < ApplicationController
 
   def index
     @gossips = Gossip.all
+    @comments = Comment.all
+    @likes = Like.all
   end
 
   def show
+    
     @gossip = Gossip.find_by_id(params[:id])
     if @gossip
       @comment = Comment.new
@@ -56,7 +59,33 @@ class GossipsController < ApplicationController
     @gossips = @user.gossips
   end
 
+  def like
+    @gossip = Gossip.find(params[:id])
+    @like = Like.new(gossip: @gossip, user: current_user)
+    if @like.save
+      flash[:success] = "Gossip liked"
+    else
+      flash[:danger] = "Failed to like gossip"
+    end
+    redirect_to gossip_path(@gossip)
+  end
+
+  def dislike
+    @gossip = Gossip.find(params[:id])
+    @like = Like.find_by(gossip: @gossip, user: current_user)
+    if @like.destroy
+      flash[:success] = "Gossip disliked"
+    else
+      flash[:danger] = "Failed to dislike gossip"
+    end
+    redirect_to gossip_path(@gossip)
+  end
+
   private
+
+  def set_gossip
+    @gossip = Gossip.find(params[:id])
+  end
 
   def gossip_params
     params.require(:gossip).permit(:title, :content)

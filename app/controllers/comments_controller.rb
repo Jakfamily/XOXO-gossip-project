@@ -21,8 +21,9 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
-
+    @gossip = Gossip.find(params[:comment][:gossip_id]) # Accès à l'ID du potin via params[:comment][:gossip_id]
+    @comment = @gossip.comments.build(comment_params) # Création du commentaire associé au potin
+  
     respond_to do |format|
       if @comment.save
         format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
@@ -33,6 +34,7 @@ class CommentsController < ApplicationController
       end
     end
   end
+  
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
