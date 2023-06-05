@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'pages/secret'
   get 'pages/contact'
   get 'pages/team'
@@ -20,14 +21,15 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'devise/sessions#destroy'
   end
   
-
-  namespace :admin do
-    get '/dashboard', to: 'dashboard#index', as: 'dashboard'
-  end
-  
   get '/contact', to: 'pages#contact'
   get '/secret', to: 'pages#secret'
   get '/team', to: 'pages#team'
-  # Defines the root path route ("/")
-  # root "articles#index"
+  
+  namespace :admin do
+    get 'dashboard/index'
+    resources :users
+    resources :gossips
+    # Ajoutez d'autres ressources pour l'administration si nécessaire
+  end
+
 end

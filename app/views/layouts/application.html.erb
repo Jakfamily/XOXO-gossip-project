@@ -19,10 +19,10 @@
       </div>
       <ul class="nav-links">
         <li><a href="/contact">Contact</a></li>
-        <li><a href="/team">Team</a></li>
+        <li><a href="/team">About</a></li>
         <% if user_signed_in? %>
           <% if current_user.admin? %> <!-- Vérifie si l'utilisateur est un admin -->
-            <li><%= link_to 'Admin Dashboard',  admin_dashboard_path %></li> <!-- Lien vers le tableau de bord de l'admin -->
+            <li><%= link_to 'Admin Dashboard', admin_dashboard_index_path %></li>
           <% end %>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <% else %>
@@ -31,8 +31,6 @@
         <% end %>
       </ul>
     </nav>
-
-
 
 
     <div class="content">

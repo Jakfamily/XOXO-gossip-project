@@ -1,9 +1,46 @@
-<h1>New gossip</h1>
+<div class="form-card">
+  <h1>New gossip</h1>
+  <br>
+  <%= form_with(model: @gossip) do |form| %>
+    <% if @gossip.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@gossip.errors.count, "error") %> prohibited this gossip from being saved:</h2>
 
-<%= render "form", gossip: @gossip %>
+        <ul>
+          <% @gossip.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<br>
+    <div class="field">
+      <%= form.label :title, style: "display: block" %>
+      <%= form.text_field :title %>
+    </div>
 
-<div>
-  <%= link_to "Back to gossips", gossips_path %>
+    <div class="field">
+      <%= form.label :content, style: "display: block" %>
+      <%= form.text_area :content %>
+    </div>
+
+    <div class="field">
+      <%= form.label :user_first_name, style: "display: block" %>
+      <%= form.text_field :user_first_name %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  <br>
+
+    <div>
+    <%= link_to "Back to gossips", gossips_path %>
+    </div>
+
 </div>
+
+
+
+

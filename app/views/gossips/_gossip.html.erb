@@ -1,4 +1,6 @@
-<div id="<%= dom_id gossip %>">
+<div id="<%= dom_id(gossip) %>" class="form-card">
+  <h2>Gossip Details</h2>
+  <br>
   <p>
     <strong>Title:</strong>
     <%= gossip.title %>
@@ -11,7 +13,7 @@
 
   <p>
     <strong>User:</strong>
-    <%= gossip.user_id %>
+    <%= gossip.first_name %>
   </p>
-
 </div>
+

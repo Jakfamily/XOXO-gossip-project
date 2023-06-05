@@ -1,2 +1,24 @@
-<h1>Pages#contact</h1>
-<p>Find me in app/views/pages/contact.html.erb</p>
+<div class="form-card">
+  <h2>Contactez-moi</h2>
+  <br>
+  <%= form_with(url: "/contact", method: "post") do |form| %>
+    <div class="field">
+      <%= form.label :name, "Nom" %><br />
+      <%= form.text_field :name, autocomplete: "name", required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :email, "Adresse e-mail" %><br />
+      <%= form.email_field :email, autocomplete: "email", required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :message, "Message" %><br />
+      <%= form.text_area :message, rows: 4, required: true %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Envoyer" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<div class="text-center">
+  <h1>Dashboard</h1>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Users</h5>
+        <p class="card-text">Total users: <%= User.count %></p>
+        <!-- Add any other information or statistics about users -->
+        <%= link_to "Manage Users", admin_users_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Gossips</h5>
+        <p class="card-text">Total gossips: <%= Gossip.count %></p>
+        <!-- Add any other information or statistics aboal gossips -->
+        <%= link_to "Manage Gossips", admin_gossips_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
