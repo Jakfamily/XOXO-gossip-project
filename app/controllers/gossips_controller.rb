@@ -1,70 +1,83 @@
 class GossipsController < ApplicationController
-  before_action :set_gossip, only: %i[ show edit update destroy ]
+  before_action :set_gossip, only: %i[show edit update destroy]
+  before_action :require_login, only: %i[new create edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
 
-  # GET /gossips or /gossips.json
   def index
     @gossips = Gossip.all
   end
 
-  # GET /gossips/1 or /gossips/1.json
   def show
+    @gossip = Gossip.find_by_id(params[:id])
+    if @gossip
+      @comment = Comment.new
+      @comments = @gossip.comments
+    else
+      redirect_to gossips_path, alert: "Le potin que vous essayez d'afficher n'existe pas."
+    end
   end
 
-  # GET /gossips/new
   def new
     @gossip = Gossip.new
+    @user_id = current_user.id
   end
 
-  # GET /gossips/1/edit
-  def edit
-  end
-
-  # POST /gossips or /gossips.json
   def create
-    @gossip = Gossip.new(gossip_params)
-
-    respond_to do |format|
-      if @gossip.save
-        format.html { redirect_to gossip_url(@gossip), notice: "Gossip was successfully created." }
-        format.json { render :show, status: :created, location: @gossip }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @gossip.errors, status: :unprocessable_entity }
-      end
+    @gossip = current_user.gossips.build(gossip_params)
+    if @gossip.save
+      flash[:success] = "Gossip created"
+      redirect_to root_path
+    else
+      render 'new'
     end
   end
 
-  # PATCH/PUT /gossips/1 or /gossips/1.json
+  def edit
+    @gossip = Gossip.find(params[:id])
+  end
+
   def update
-    respond_to do |format|
-      if @gossip.update(gossip_params)
-        format.html { redirect_to gossip_url(@gossip), notice: "Gossip was successfully updated." }
-        format.json { render :show, status: :ok, location: @gossip }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @gossip.errors, status: :unprocessable_entity }
-      end
+    @gossip = Gossip.find(params[:id])
+    if @gossip.update(gossip_params)
+      redirect_to gossips_path
+    else
+      render 'edit'
     end
   end
 
-  # DELETE /gossips/1 or /gossips/1.json
   def destroy
+    @gossip = Gossip.find(params[:id])
     @gossip.destroy
+    redirect_to gossips_path
+  end
 
-    respond_to do |format|
-      format.html { redirect_to gossips_url, notice: "Gossip was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def user_gossips
+    @user = User.find(params[:user_id])
+    @gossips = @user.gossips
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gossip
-      @gossip = Gossip.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def gossip_params
-      params.require(:gossip).permit(:title, :content, :user_id)
+  def gossip_params
+    params.require(:gossip).permit(:title, :content)
+  end
+
+  def require_login
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_to root_path
     end
+  end
+
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def authorize_user
+    @gossip = Gossip.find(params[:id])
+    unless @gossip.user == current_user
+      flash[:danger] = "You are not authorized to perform this action"
+      redirect_to root_path
+    end
+  end
 end
